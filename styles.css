@@ -1,0 +1,131 @@
+body {
+  /* background-color: black; */
+
+  /* background-image: url(download.png);
+    background-repeat: no-repeat;
+    background-size: contain; */
+
+  margin: 0;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("ninja.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#Main-container {
+  display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+}
+
+.header {
+  color: rgb(0 0 0 / 90%);
+  font-family: fantasy;
+  font-size: 3em;
+  text-align: center;
+}
+
+#todo-container {
+}
+
+#text1 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: rgb(25 25 25 / 80%);
+  width: 343.75px;
+  height: 35px;
+  border: 1px solid #616161;
+  margin-left: 191px;
+  padding-left: 15px;
+  border-radius: 4px;
+  color: white;
+}
+#text1::placeholder {
+  color: white;
+}
+#add {
+  background-color: rgb(25 25 25 / 80%);
+  color: white;
+  padding: 5px;
+  /* border: none; */
+  border-radius: 5%;
+  margin-top: 5px;
+  margin-right: 151px;
+  width: 76.92px;
+  height: 32px;
+  /* border-style: solid; */
+  border-width: 0.0625rem;
+  border-radius: 5px;
+  border-color: rgba(0, 0, 0, 0);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "rubi";
+  font-size: 0.9rem;
+  transition: background-color 0.25s;
+}
+
+#add:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.output-p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  height: 37px;
+  color: white;
+  background-color: rgb(25 25 25 / 80%);
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  border: none;
+  border-radius: 5px;
+  /* box-shadow: 2px 2px 5px 3px rgb(0 0 0 / 20%); */
+  box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+  transition: background-color 0.25s;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.output-p:hover {
+  background-color: rgba(53, 53, 53, 0.8);
+}
+
+.output-delete {
+  color: white;
+  background-color: rgb(25 25 25 / 0%);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 0.9em;
+}
+.output-delete:hover {
+  background-color: rgba(53, 53, 53, 0.8);
+}
+
+.output-edit {
+  color: white;
+  background-color: rgb(25 25 25 / 0%);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 0.9em;
+
+}
+
+.output-edit:hover {
+  background-color: rgba(53, 53, 53, 0.8);
+}
+
+
+.p-div{
+  display: flex;
+  width: 673px;
+}
+
