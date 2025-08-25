@@ -30,6 +30,7 @@ body {
 }
 
 #todo-container {
+  width: 870px;
 }
 
 #text1 {
@@ -127,5 +128,90 @@ body {
 .p-div{
   display: flex;
   width: 673px;
+
 }
 
+/* Testing  */
+
+.output-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  height: 37px;
+  color: white;
+  background-color: rgb(74 74 74 / 80%);
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  border: none;
+  border-radius: 5px;
+  /* box-shadow: 2px 2px 5px 3px rgb(0 0 0 / 20%); */
+  box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+  /* transition: background-color 0.25s; */
+  /* cursor: pointer; */
+  margin-top: 20px;
+}
+
+.d{
+  text-decoration: line-through;
+}
+
+.output-done{
+  color: white;
+  background-color: rgb(25 25 25 / 0%);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 0.9em;  
+
+}
+.output-done:hover{
+  background-color: rgba(53, 53, 53, 0.8);  
+}
+
+.output-save{
+  color: white;
+  background-color: rgb(25 25 25 / 0%);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 0.9em;  
+  margin-left: 75px;
+
+}
+
+.output-save:hover{
+  background-color: rgba(53, 53, 53, 0.8);  
+}
+
+.output-cancel{
+  color: white;
+  background-color: rgb(25 25 25 / 0%);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 0.9em;  
+
+}
+
+.output-cancel:hover{
+  background-color: rgba(53, 53, 53, 0.8);  
+}
+
+
+.c{
+
+}
+
+.new-input{
+  width: 673px;
+    background-color: rgb(25 25 25 / 50%);
+    border: none;
+    color: white;
+    height: 19px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1em;
+}

@@ -36,12 +36,11 @@ adddata.addEventListener("click", () => {
         
          <button class="output-delete" data-id="${newtask.id}" >Delete</button>
         <button class="output-edit" data-id="${newtask.id}" data-title="${newtask.title}">Edit</button>
-        
-        
-                
+        <button class="output-done" data-id="${newtask.id}" data-title="${newtask.title}">Compeleted</button>
         `;
-
-  container.appendChild(newnode);
+// Testing Done button ---------------
+  
+container.appendChild(newnode);
 
   inputfeild.value = "";
 
@@ -110,7 +109,9 @@ container.addEventListener("click", (event) => {
     
     <button class="output-delete" data-id="${task2}">Delete</button>
     <button class="output-edit" data-id="${task2}" data-title="${textdata2}">Edit</button>
+    <button class="output-done" data-id="${task2}" data-title="${textdata2}">Compeleted</button>
     `;
+    // Testing Done button ---------------
 
     let taskObj = output.find((task) => task.id === task2);
     if (taskObj) {
@@ -121,21 +122,42 @@ container.addEventListener("click", (event) => {
   } else if (event.target.classList.contains("output-cancel")) {
     let task3 = parseInt(event.target.dataset.id);
     let parentdiv = event.target.parentElement;
-
+    
     // let textdata = parentdiv.querySelector(".p-div").innerHTML
 
     let maintext = event.target.dataset.title;
-
+    
     parentdiv.innerHTML = `
     <div class="p-div"><p class="c">${maintext}</p></div>
     
     <button class="output-delete" data-id="${task3}">Delete</button>
     <button class="output-edit" data-id="${task3}" data-title="${maintext}">Edit</button>
+    <button class="output-done" data-id="${task3}" data-title="${maintext}">Compeleted</button>     
     `;
-
+    // Testing done button 
+  
     // console.log(textdata)
+}
+
+// Testing --------------------------------------------
+else if (event.target.classList.contains("output-done")){
+    let task4 = parseInt(event.target.dataset.id);
+    let parentdiv = event.target.parentElement;
+    
+    let maintext = event.target.dataset.title;
+    // let parentvalue = parentdiv.querySelector("output-p")
+    parentdiv.className = "output-new"
+    
+    parentdiv.innerHTML = `
+    <div class="p-div"><p class="d">${maintext} </p></div>
+    
+    <button class="output-delete" data-id="${task4}">Delete</button>
+    `;
   }
+
 });
+
+
 
 
 
