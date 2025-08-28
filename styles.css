@@ -23,10 +23,11 @@ body {
 }
 
 .header {
-  color: rgb(0 0 0 / 90%);
-  font-family: fantasy;
-  font-size: 3em;
-  text-align: center;
+    color: rgb(255 255 255 / 90%);
+    font-family: fantasy;
+    font-size: 3em;
+    text-align: center;
+    -webkit-text-stroke: 0.08rem rgb(0 0 0);
 }
 
 #todo-container {
@@ -153,7 +154,7 @@ body {
 }
 
 .d{
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
 }
 
 .output-done{
@@ -208,10 +209,30 @@ body {
 
 .new-input{
   width: 673px;
-    background-color: rgb(25 25 25 / 50%);
+    background-color: rgb(156 156 156 / 50%);
     border: none;
     color: white;
     height: 19px;
     font-family: "Courier New", Courier, monospace;
     font-size: 1em;
 }
+.new-input::placeholder{
+  color: white;
+}
+
+.output-undone{
+  color: white;
+  background-color: rgb(25 25 25 / 0%);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 0.9em;  
+
+}
+
+.output-undone:hover{
+  background-color: rgba(53, 53, 53, 0.8);  
+}
+
+

@@ -1,9 +1,78 @@
-let objectIdCounter = 1;
 let output = [];
 
 const container = document.getElementById("todo-container");
 const adddata = document.getElementById("add");
 const inputfeild = document.getElementById("text1");
+
+// Saving done now attaching remaining --------------------------------------------
+// ------------------------------------------Tesing local storage fucntions :
+// output = loadTodos();
+
+function saveTodos(todos) {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function loadTodos() {
+  const storedTodos = localStorage.getItem("todos");
+  return storedTodos ? JSON.parse(storedTodos) : [];
+}
+
+
+// saveTodos(output)
+// -------------------------------------------------Testing Enter key function
+
+//   container.querySelector(".output-p, .output-new").forEach((value) => value.remove());
+// output.forEach((task) => displaytodos(task));
+function display_render() {
+  container
+    .querySelectorAll(".output-p, .output-new")
+    .forEach((item) => item.remove());
+  output.forEach((task) => displaytodos(task));
+}
+// ---------------------------------------------------------------
+// --------------------------------Display Function :
+
+function displaytodos(task) {
+  let newnode = document.createElement("div");
+
+  // newnode.className = task.completed ? "output-new" : "output-p";
+
+  if (task.completed) {
+    newnode.className = "output-new";
+    newnode.innerHTML = `
+    <div class="p-div"><p class="d">${task.title} (completed) </p></div>
+    
+    <button class="output-delete" data-id="${task.id}">Delete</button>
+    <button class="output-undone" data-id="${task.id}" data-title="${task.title}">Undone</button>
+    `;
+  }
+
+
+  // ---------------------------------------------------Testing : ----------------
+  else if (task.editmode) {
+    newnode.className = "output-p";
+    newnode.innerHTML = ` 
+     <div class="p-div"><p class="c"><input type="text"  id="new-text"  class="new-input" value="${task.title}" placeholder="Enter task" /></p></div>
+     <button class="output-save" data-id="${task.id}">Save</button>
+     <button class="output-cancel" data-id="${task.id}" data-title="${task.title}">Cancel</button>
+     `;
+  }
+
+  // ---------------------------------------------------Testing : ----------------
+  else {
+    newnode.className = "output-p";
+    newnode.innerHTML = `
+        <div class="p-div"><p class="c">${task.title}</p></div>
+        
+         <button class="output-delete" data-id="${task.id}" >Delete</button>
+        <button class="output-edit" data-id="${task.id}" data-title="${task.title}">Edit</button>
+        <button class="output-done" data-id="${task.id}" data-title="${task.title}">Compeleted</button>
+        `;
+  }
+  container.appendChild(newnode);
+}
+
+// ------------------------------------------------------ADD Functions
 
 adddata.addEventListener("click", () => {
   let val = inputfeild.value.trim();
@@ -13,149 +82,94 @@ adddata.addEventListener("click", () => {
   }
 
   let newtask = {
-    id: objectIdCounter,
+    id: Date.now(),
     title: val,
+    completed: false,
+    editmode: false,
+
     // value:true
   };
-  objectIdCounter++;
 
   output.push(newtask);
-  //    count++
-  //   create()
-
-  let newnode = document.createElement("div");
-  // let  newbutton = document.createElement("button");
-  //   newbutton.className = "output-delete";
-  //   newnode.appendChild(newbutton);
-  //   newbutton.innerText = "Delete";
-
-  newnode.className = "output-p";
-  //   newnode.id = "c"
-  newnode.innerHTML = `
-        <div class="p-div"><p class="c">${newtask.title}</p></div>
-        
-         <button class="output-delete" data-id="${newtask.id}" >Delete</button>
-        <button class="output-edit" data-id="${newtask.id}" data-title="${newtask.title}">Edit</button>
-        <button class="output-done" data-id="${newtask.id}" data-title="${newtask.title}">Compeleted</button>
-        `;
-// Testing Done button ---------------
-  
-container.appendChild(newnode);
+  saveTodos(output); // Testing functions of local storage :
+  display_render();
 
   inputfeild.value = "";
-
-  //     newbutton.addEventListener("click", () => {
-  //     newnode.remove();
-
-  //     output = output.filter(task => task.id !== newtask.id);
-  //     // let cleanarr = output.indexOf(newtask.title);
-  //     // if (cleanarr > -1) {
-  //     //   output.splice(cleanarr, 1);
-  //     // }
-  //     console.log("After delete : ",output);
-
-  //   });
 
   console.log(output);
 });
 
-// document.addEventListener("click" , (e) =>{
-//     if(e.target.document.getElementById("head")){
-//         console.log(`CLicked ${document.getElementById("head")}`)
-//     }
-// })
+inputfeild.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    adddata.click();
+  }
+});
+
+// Functions of cancel , save , delete, update , done , used event delegation ------------------
 
 container.addEventListener("click", (event) => {
+  const id = parseInt(event.target.dataset.id);
+  let taskobj = output.find((task) => task.id === id);
+
   if (event.target.classList.contains("output-delete")) {
-    let valueconverter = parseInt(event.target.dataset.id);
+    output = output.filter((task) => task.id !== id);
 
-    event.target.parentElement.remove();
-
-    output = output.filter((task) => task.id !== valueconverter);
-
+    saveTodos(output); // Testing functions of local storage :
+    display_render();
     console.log(output);
   } else if (event.target.classList.contains("output-edit")) {
-    let task1 = parseInt(event.target.dataset.id);
-    let parentdiv = event.target.parentElement;
-
-    let maintext = event.target.dataset.title;
-
-    let textdata = parentdiv.querySelector(".c").innerHTML;
-    parentdiv.innerHTML = ` 
-    <div class="p-div"><p class="c"><input type="text" class="new-input" value="${textdata}" placeholder="Enter task" /></p></div>
-    <button class="output-save" data-id="${task1}">Save</button>
-    <button class="output-cancel" data-id="${task1}" data-title="${maintext}">Cancel</button>
-    `;
-    // let  newinput = document.createElement("input");
-    // container.appendChild(newinput)
-    // let gettingchild = container.children
-    // gettingchild.appendChild(newinput)
-    // let newval = gettingchild[3]
-
-    // newval.remove(children)
-    // console.log(newval)  //.childNodes[1]
-
-    // console.log(`clicked ${event.target}`)
-    // console.log(parentdiv)
-    // console.log(textcontent)
+    taskobj.editmode = true;
+    saveTodos(output);
+    display_render();
   } else if (event.target.classList.contains("output-save")) {
-    let task2 = parseInt(event.target.dataset.id);
-    let parentdiv = event.target.parentElement;
+    let newtext = event.target.parentElement
+      .querySelector(".new-input")
+      .value.trim();
 
-    let textdata2 = parentdiv.querySelector(".new-input").value;
-
-    parentdiv.innerHTML = `
-    <div class="p-div"><p class="c">${textdata2}</p></div>
-    
-    <button class="output-delete" data-id="${task2}">Delete</button>
-    <button class="output-edit" data-id="${task2}" data-title="${textdata2}">Edit</button>
-    <button class="output-done" data-id="${task2}" data-title="${textdata2}">Compeleted</button>
-    `;
-    // Testing Done button ---------------
-
-    let taskObj = output.find((task) => task.id === task2);
-    if (taskObj) {
-      taskObj.title = textdata2;
+    if (newtext < 1) {
+      alert("task cannot be empty ");
+      return;
     }
-
-    console.log(output);
+    taskobj.title = newtext;
+    taskobj.editmode = false;
+    saveTodos(output);
+    display_render();
   } else if (event.target.classList.contains("output-cancel")) {
-    let task3 = parseInt(event.target.dataset.id);
-    let parentdiv = event.target.parentElement;
-    
-    // let textdata = parentdiv.querySelector(".p-div").innerHTML
-
-    let maintext = event.target.dataset.title;
-    
-    parentdiv.innerHTML = `
-    <div class="p-div"><p class="c">${maintext}</p></div>
-    
-    <button class="output-delete" data-id="${task3}">Delete</button>
-    <button class="output-edit" data-id="${task3}" data-title="${maintext}">Edit</button>
-    <button class="output-done" data-id="${task3}" data-title="${maintext}">Compeleted</button>     
-    `;
-    // Testing done button 
-  
-    // console.log(textdata)
-}
-
-// Testing --------------------------------------------
-else if (event.target.classList.contains("output-done")){
-    let task4 = parseInt(event.target.dataset.id);
-    let parentdiv = event.target.parentElement;
-    
-    let maintext = event.target.dataset.title;
-    // let parentvalue = parentdiv.querySelector("output-p")
-    parentdiv.className = "output-new"
-    
-    parentdiv.innerHTML = `
-    <div class="p-div"><p class="d">${maintext} </p></div>
-    
-    <button class="output-delete" data-id="${task4}">Delete</button>
-    `;
+    taskobj.editmode = false;
+    saveTodos(output);
+    display_render();
   }
 
+  // Testing --------------------------------------------
+  else if (event.target.classList.contains("output-done")) {
+    taskobj.completed = true;
+    saveTodos(output);
+    display_render();
+    
+  }
+
+  else if (event.target.classList.contains("output-undone")){
+      taskobj.completed= false;
+      saveTodos(output)
+      display_render()
+    }
+
+
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  output = loadTodos();
+  // console.log(loadTodos())
+
+  display_render();
+});
+
+
+
+
+
+
 
 
 
