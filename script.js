@@ -17,7 +17,6 @@ function loadTodos() {
   return storedTodos ? JSON.parse(storedTodos) : [];
 }
 
-
 // saveTodos(output)
 // -------------------------------------------------Testing Enter key function
 
@@ -46,7 +45,6 @@ function displaytodos(task) {
     <button class="output-undone" data-id="${task.id}" data-title="${task.title}">Undone</button>
     `;
   }
-
 
   // ---------------------------------------------------Testing : ----------------
   else if (task.editmode) {
@@ -146,16 +144,11 @@ container.addEventListener("click", (event) => {
     taskobj.completed = true;
     saveTodos(output);
     display_render();
-    
+  } else if (event.target.classList.contains("output-undone")) {
+    taskobj.completed = false;
+    saveTodos(output);
+    display_render();
   }
-
-  else if (event.target.classList.contains("output-undone")){
-      taskobj.completed= false;
-      saveTodos(output)
-      display_render()
-    }
-
-
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -164,6 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   display_render();
 });
+
+
+
+
+
+
+
+
 
 
 
